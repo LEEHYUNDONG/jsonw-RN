@@ -60,7 +60,7 @@ export default function App() {
 
   const getData = () => {
     setLoading(true);
-    fetch("http://172.30.1.9:8000/snippets")
+    fetch("http://172.0.0.1:8000/snippets")
       .then(res => res.json())
       .then(res => setData(data.concat(res.slice(offset, offset + LIMIT))))
       .then(() => {
@@ -77,9 +77,11 @@ export default function App() {
       return;
     } else {
       getData();
+      console.log(data);
     }
     useEffect(() => {
       getData();
+      console.log(data);
     }, []);
   };
 
