@@ -60,29 +60,37 @@ export default function App() {
 
   const getData = () => {
     setLoading(true);
-    fetch("http://172.0.0.1:8000/snippets")
-      .then(res => res.json())
+    fetch("http://18.224.64.213:8080/snippets")
+      .then(
+        res =>
+          //res => res.json();
+          console.log(res)
+        //console.log(data);
+      )
       .then(res => setData(data.concat(res.slice(offset, offset + LIMIT))))
       .then(() => {
+        console.log(data);
         setOffset(offset + LIMIT);
         setLoading(false);
       })
       .catch(error => {
         setLoading(false);
-        Alert.alert("Error!");
+        Alert.alert("Error!", error);
       });
   };
+
   const onEndReached = () => {
+    getData();
     if (loading) {
       return;
     } else {
       getData();
       console.log(data);
     }
-    useEffect(() => {
-      getData();
-      console.log(data);
-    }, []);
+    //useEffect(() => {
+    //  getData();
+    //  console.log(data);
+    //});
   };
 
   return (
